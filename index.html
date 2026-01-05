@@ -101,6 +101,7 @@ footer{text-align:center;padding:20px;background:#007BFF;color:white;}
 <footer>
 <p>&copy; 2026 Cabinet Dentaire Paris. Tous droits réservés.</p>
 </footer>
+
 <!-- Chatbot IA Cabinet Dentaire -->
 <div id="chatbot" style="position:fixed;bottom:20px;right:20px;width:320px;max-width:90%;background:white;border:2px solid #007BFF;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.2);overflow:hidden;font-family:Arial,sans-serif;display:flex;flex-direction:column;">
   <div style="background:#007BFF;color:white;padding:10px;font-weight:bold;">Assistant Cabinet Dentaire</div>
@@ -112,7 +113,6 @@ footer{text-align:center;padding:20px;background:#007BFF;color:white;}
 const chatMessages = document.getElementById('chatMessages');
 const chatInput = document.getElementById('chatInput');
 
-// Fonction pour ajouter un message dans le chat
 function addMessage(sender, text){
   const msg = document.createElement('div');
   msg.style.marginBottom = '10px';
@@ -121,8 +121,10 @@ function addMessage(sender, text){
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Workflow de prise de rendez-vous
-const workflow = { patientInfo: {}, step: 0 };
+// Simuler créneaux disponibles
+const availableSlots = ["Demain 10h", "Demain 14h", "Vendredi 9h", "Vendredi 15h"];
+
+const workflow = { patientInfo: {}, step: 0, currentSlotIndex: 0 };
 
 chatInput.addEventListener('keydown', async function(e){
   if(e.key === 'Enter' && chatInput.value.trim() !== ''){
@@ -133,33 +135,52 @@ chatInput.addEventListener('keydown', async function(e){
     switch(workflow.step){
       case 0:
         workflow.patientInfo.nom = userMsg;
-        addMessage("Assistant", "Merci "+userMsg+". Quel soin souhaitez-vous ?");
+        addMessage("Assistant", `Bonjour ${workflow.patientInfo.nom}, merci de votre visite ! Quel soin souhaitez-vous ?`);
         workflow.step++;
         break;
       case 1:
         workflow.patientInfo.soin = userMsg;
-        addMessage("Assistant", "Parfait. Quel jour et heure souhaitez-vous pour le rendez-vous ?");
+        addMessage("Assistant", `Très bien. Je vais vous proposer un créneau disponible pour "${workflow.patientInfo.soin}".`);
         workflow.step++;
         break;
       case 2:
-        workflow.patientInfo.date = userMsg;
-        addMessage("Assistant", "Merci ! Veuillez entrer votre email pour confirmer le rendez-vous.");
-        workflow.step++;
+        // Proposer un créneau
+        if(workflow.currentSlotIndex < availableSlots.length){
+          workflow.patientInfo.date = availableSlots[workflow.currentSlotIndex];
+          addMessage("Assistant", `Le créneau disponible est : ${workflow.patientInfo.date}. Cela vous convient-il ? (oui/non)`);
+          workflow.step = 3;
+        } else {
+          addMessage("Assistant", "Désolé, aucun créneau disponible pour le moment. Veuillez choisir un autre jour ou nous contacter directement.");
+          workflow.step = 0;
+        }
         break;
       case 3:
-        workflow.patientInfo.email = userMsg;
-        addMessage("Assistant", "Super ! Votre rendez-vous est enregistré. Vous recevrez une confirmation par email.");
-        workflow.step++;
-
-        // Envoi des infos au backend pour ajouter RDV + emails + suivi
+        if(userMsg.toLowerCase().includes("oui")){
+          addMessage("Assistant", "Super ! Pour finaliser, pouvez-vous me donner votre email et numéro de téléphone ?");
+          workflow.step = 4;
+        } else {
+          workflow.currentSlotIndex++;
+          workflow.step = 2;
+        }
+        break;
+      case 4:
+        // Attendre format "email / téléphone"
+        const parts = userMsg.split(/[ ,;/]/);
+        workflow.patientInfo.email = parts.find(p => p.includes("@")) || "";
+        workflow.patientInfo.tel = parts.find(p => /\d{10}/.test(p)) || "";
+        addMessage("Assistant", `Merci ! Votre rendez-vous pour "${workflow.patientInfo.soin}" est enregistré le ${workflow.patientInfo.date}. Vous recevrez une confirmation par email.`);
+        
+        // Envoyer au backend
         await fetch("https://ton-backend.com/api/rdv", {
           method:"POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(workflow.patientInfo)
         });
 
+        // Reset workflow
         workflow.patientInfo = {};
         workflow.step = 0;
+        workflow.currentSlotIndex = 0;
         break;
     }
   }
