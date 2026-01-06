@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cabinet Dentaire</title>
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif;}
 body{line-height:1.6;color:#333;background:#f9f9f9;}
@@ -13,35 +14,36 @@ header{background:#007BFF;color:white;padding:20px;text-align:center;}
 header h1{font-size:2rem;margin-bottom:5px;}
 header p{font-size:1.2rem;}
 nav{display:flex;justify-content:center;background:#0056b3;}
-nav a{color:white;padding:15px 20px;display:inline-block;transition:0.3s;}
+nav a{color:white;padding:15px 20px;transition:0.3s;}
 nav a:hover{background:#004085;}
 section{padding:60px 20px;max-width:1200px;margin:auto;}
 h2{text-align:center;margin-bottom:40px;color:#007BFF;}
 .hero{text-align:center;}
 .hero img{max-width:200px;margin-bottom:20px;}
-.hero .btn{display:inline-block;background:#007BFF;color:white;padding:12px 25px;border-radius:5px;font-weight:bold;transition:0.3s;}
+.hero .btn{display:inline-block;background:#007BFF;color:white;padding:12px 25px;border-radius:5px;font-weight:bold;}
 .hero .btn:hover{background:#0056b3;}
-.team{display:flex;flex-wrap:wrap;gap:20px;justify-content:center;}
+.team{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;}
 .team img{border-radius:10px;width:200px;height:200px;object-fit:cover;}
 .services-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px;}
-.service-item{background:white;padding:20px;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.1);text-align:center;}
-.contact-form{max-width:600px;margin:auto;background:white;padding:20px;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.1);}
-.contact-form input,.contact-form textarea{width:100%;padding:12px;margin-bottom:15px;border:1px solid #ccc;border-radius:5px;}
-.contact-form button{background:#007BFF;color:white;padding:12px 20px;border:none;border-radius:5px;cursor:pointer;font-weight:bold;}
-.contact-form button:hover{background:#0056b3;}
+.service-item{background:white;padding:20px;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.1);}
+.contact-form{max-width:600px;margin:auto;background:white;padding:20px;border-radius:10px;}
+.contact-form input,.contact-form textarea{width:100%;padding:12px;margin-bottom:15px;border-radius:5px;border:1px solid #ccc;}
+.contact-form button{background:#007BFF;color:white;padding:12px;border:none;border-radius:5px;font-weight:bold;}
 .contact-info{text-align:center;margin-top:20px;}
-iframe{width:100%;height:300px;border:0;border-radius:10px;margin-top:20px;}
-.faq-item{margin-bottom:20px;background:white;padding:15px 20px;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.05);}
-.faq-item h3{margin-bottom:10px;color:#0056b3;}
-footer{text-align:center;padding:20px;background:#007BFF;color:white;}
-@media(max-width:768px){nav{flex-direction:column;}.team{flex-direction:column;align-items:center;}}
+iframe{width:100%;height:300px;border-radius:10px;margin-top:20px;}
+.faq-item{background:white;padding:15px;border-radius:10px;margin-bottom:15px;}
+footer{text-align:center;background:#007BFF;color:white;padding:20px;}
+@media(max-width:768px){nav{flex-direction:column;}}
 </style>
 </head>
+
 <body>
+
 <header>
 <h1>Cabinet Dentaire Paris</h1>
-<p>Souriez en toute confiance !</p>
+<p>Souriez en toute confiance</p>
 </header>
+
 <nav>
 <a href="#accueil">Accueil</a>
 <a href="#services">Services</a>
@@ -50,141 +52,103 @@ footer{text-align:center;padding:20px;background:#007BFF;color:white;}
 </nav>
 
 <section id="accueil" class="hero">
-<img src="https://via.placeholder.com/200x200?text=Logo" alt="Logo Cabinet Dentaire">
+<img src="https://via.placeholder.com/200" alt="Logo">
 <h2>Bienvenue dans notre cabinet</h2>
-<p>Une équipe de professionnels à votre service pour un sourire parfait.</p>
-<a href="#contact" class="btn">Prendre Rendez-vous</a>
-<h2>Notre Équipe</h2>
+<p>Des soins dentaires de qualité pour toute la famille</p>
+<a href="#contact" class="btn">Prendre rendez-vous</a>
+
+<h2>Notre équipe</h2>
 <div class="team">
-<img src="https://via.placeholder.com/200?text=Dr+Dupont" alt="Dr Dupont">
-<img src="https://via.placeholder.com/200?text=Dr+Martin" alt="Dr Martin">
-<img src="https://via.placeholder.com/200?text=Dr+Durand" alt="Dr Durand">
+<img src="https://via.placeholder.com/200?text=Dr+Dupont">
+<img src="https://via.placeholder.com/200?text=Dr+Martin">
+<img src="https://via.placeholder.com/200?text=Dr+Durand">
 </div>
 </section>
 
 <section id="services">
-<h2>Nos Services</h2>
+<h2>Nos services</h2>
 <div class="services-list">
-<div class="service-item"><h3>Consultation Générale</h3><p>Évaluation complète de votre santé bucco-dentaire.</p></div>
-<div class="service-item"><h3>Soins Dentaires</h3><p>Traitements des caries, détartrage et soins conservateurs.</p></div>
-<div class="service-item"><h3>Orthodontie</h3><p>Appareils dentaires pour enfants et adultes.</p></div>
-<div class="service-item"><h3>Chirurgie Dentaire</h3><p>Extraction, implants et interventions chirurgicales spécialisées.</p></div>
-<div class="service-item"><h3>Esthétique Dentaire</h3><p>Blanchiment, facettes et amélioration du sourire.</p></div>
+<div class="service-item"><h3>Consultation</h3><p>Bilan dentaire complet</p></div>
+<div class="service-item"><h3>Soins</h3><p>Caries, détartrage</p></div>
+<div class="service-item"><h3>Orthodontie</h3><p>Enfants et adultes</p></div>
+<div class="service-item"><h3>Chirurgie</h3><p>Implants et extractions</p></div>
+<div class="service-item"><h3>Esthétique</h3><p>Blanchiment, facettes</p></div>
 </div>
 </section>
 
 <section id="contact">
-<h2>Contactez-Nous</h2>
+<h2>Contact</h2>
 <div class="contact-form">
-<form action="#" method="post">
-<input type="text" name="name" placeholder="Votre Nom" required>
-<input type="email" name="email" placeholder="Votre Email" required>
-<textarea name="message" rows="5" placeholder="Votre Message" required></textarea>
+<form>
+<input type="text" placeholder="Nom">
+<input type="email" placeholder="Email">
+<textarea placeholder="Message"></textarea>
 <button type="submit">Envoyer</button>
 </form>
 </div>
+
 <div class="contact-info">
 <p>Téléphone : 07 75 80 07 39</p>
-<p>Adresse : 123 Rue de la Santé, 75000 Paris, France</p>
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.999231393963!2d2.292292315674083!3d48.858373979287816!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fefbff4b23d%3A0xf3f6b8f6c1c0c0!2sEiffel%20Tower!5e0!3m2!1sfr!2sfr!4v1580000000000!5m2!1sfr!2sfr" allowfullscreen></iframe>
+<p>Email : aeyvaz97@gmail.com</p>
+<p>Adresse : 123 Rue de la Santé, Paris</p>
+<iframe src="https://www.google.com/maps/embed"></iframe>
 </div>
 </section>
 
 <section id="faq">
-<h2>Questions Fréquentes</h2>
-<div class="faq-item"><h3>Quels sont vos horaires d'ouverture ?</h3><p>Nous sommes ouverts du lundi au vendredi de 9h à 19h et le samedi de 9h à 13h.</p></div>
-<div class="faq-item"><h3>Faites-vous des consultations pour enfants ?</h3><p>Oui, nous accueillons les patients de tous âges, y compris les enfants.</p></div>
-<div class="faq-item"><h3>Acceptez-vous la carte Vitale et les mutuelles ?</h3><p>Oui, nous acceptons la carte Vitale et travaillons avec toutes les mutuelles principales.</p></div>
-<div class="faq-item"><h3>Comment prendre rendez-vous ?</h3><p>Vous pouvez utiliser notre formulaire en ligne ou nous appeler directement au 07 75 80 07 39.</p></div>
+<h2>FAQ</h2>
+<div class="faq-item"><h3>Horaires ?</h3><p>Lundi–Vendredi 9h–19h</p></div>
+<div class="faq-item"><h3>Mutuelle ?</h3><p>Oui</p></div>
+<div class="faq-item"><h3>Urgence ?</h3><p>Appelez-nous</p></div>
 </section>
 
 <footer>
-<p>&copy; 2026 Cabinet Dentaire Paris. Tous droits réservés.</p>
+<p>© 2026 Cabinet Dentaire</p>
 </footer>
 
-<!-- Chatbot IA Cabinet Dentaire -->
-<div id="chatbot" style="position:fixed;bottom:20px;right:20px;width:320px;max-width:90%;background:white;border:2px solid #007BFF;border-radius:10px;box-shadow:0 4px 8px rgba(0,0,0,0.2);overflow:hidden;font-family:Arial,sans-serif;display:flex;flex-direction:column;">
-  <div style="background:#007BFF;color:white;padding:10px;font-weight:bold;">Assistant Cabinet Dentaire</div>
-  <div id="chatMessages" style="flex:1;padding:10px;overflow-y:auto;height:280px;"></div>
-  <input id="chatInput" type="text" placeholder="Écrivez votre message..." style="border:none;border-top:1px solid #ccc;padding:10px;font-size:14px;outline:none;">
+<!-- ================= CHATBOT IA ================= -->
+
+<div id="chatbot" style="position:fixed;bottom:20px;right:20px;width:320px;background:white;border:2px solid #007BFF;border-radius:10px;display:flex;flex-direction:column;">
+  <div style="background:#007BFF;color:white;padding:10px;font-weight:bold;">
+    Assistant Cabinet Dentaire
+  </div>
+  <div id="chatMessages" style="flex:1;padding:10px;overflow-y:auto;height:260px;"></div>
+  <input id="chatInput" placeholder="Écrivez votre message…" style="border:none;border-top:1px solid #ccc;padding:10px;">
 </div>
 
 <script>
-const chatMessages = document.getElementById('chatMessages');
-const chatInput = document.getElementById('chatInput');
+const chatMessages = document.getElementById("chatMessages");
+const chatInput = document.getElementById("chatInput");
+
+const CABINET_EMAIL = "aeyvaz97@gmail.com"; // email officiel du cabinet
 
 function addMessage(sender, text){
-  const msg = document.createElement('div');
-  msg.style.marginBottom = '10px';
-  msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
-  chatMessages.appendChild(msg);
+  const div = document.createElement("div");
+  div.style.marginBottom = "10px";
+  div.innerHTML = "<strong>" + sender + " :</strong> " + text;
+  chatMessages.appendChild(div);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Simuler créneaux disponibles
-const availableSlots = ["Demain 10h", "Demain 14h", "Vendredi 9h", "Vendredi 15h"];
+// Message de bienvenue
+addMessage("Assistant","Bonjour 👋 Comment puis-je vous aider aujourd’hui ?");
 
-const workflow = { patientInfo: {}, step: 0, currentSlotIndex: 0 };
+// Fonction IA futur backend
+async function askAI(message){
+  // Ici backend IA plus tard
+  return "Merci pour votre message 😊 Souhaitez-vous un rendez-vous ou une information ?";
+}
 
-chatInput.addEventListener('keydown', async function(e){
-  if(e.key === 'Enter' && chatInput.value.trim() !== ''){
-    const userMsg = chatInput.value.trim();
-    addMessage("Vous", userMsg);
-    chatInput.value = '';
-
-    switch(workflow.step){
-      case 0:
-        workflow.patientInfo.nom = userMsg;
-        addMessage("Assistant", `Bonjour ${workflow.patientInfo.nom}, merci de votre visite ! Quel soin souhaitez-vous ?`);
-        workflow.step++;
-        break;
-      case 1:
-        workflow.patientInfo.soin = userMsg;
-        addMessage("Assistant", `Très bien. Je vais vous proposer un créneau disponible pour "${workflow.patientInfo.soin}".`);
-        workflow.step++;
-        break;
-      case 2:
-        // Proposer un créneau
-        if(workflow.currentSlotIndex < availableSlots.length){
-          workflow.patientInfo.date = availableSlots[workflow.currentSlotIndex];
-          addMessage("Assistant", `Le créneau disponible est : ${workflow.patientInfo.date}. Cela vous convient-il ? (oui/non)`);
-          workflow.step = 3;
-        } else {
-          addMessage("Assistant", "Désolé, aucun créneau disponible pour le moment. Veuillez choisir un autre jour ou nous contacter directement.");
-          workflow.step = 0;
-        }
-        break;
-      case 3:
-        if(userMsg.toLowerCase().includes("oui")){
-          addMessage("Assistant", "Super ! Pour finaliser, pouvez-vous me donner votre email et numéro de téléphone ?");
-          workflow.step = 4;
-        } else {
-          workflow.currentSlotIndex++;
-          workflow.step = 2;
-        }
-        break;
-      case 4:
-        // Attendre format "email / téléphone"
-        const parts = userMsg.split(/[ ,;/]/);
-        workflow.patientInfo.email = parts.find(p => p.includes("@")) || "";
-        workflow.patientInfo.tel = parts.find(p => /\d{10}/.test(p)) || "";
-        addMessage("Assistant", `Merci ! Votre rendez-vous pour "${workflow.patientInfo.soin}" est enregistré le ${workflow.patientInfo.date}. Vous recevrez une confirmation par email.`);
-        
-        // Envoyer au backend
-        await fetch("https://ton-backend.com/api/rdv", {
-          method:"POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(workflow.patientInfo)
-        });
-
-        // Reset workflow
-        workflow.patientInfo = {};
-        workflow.step = 0;
-        workflow.currentSlotIndex = 0;
-        break;
-    }
+chatInput.addEventListener("keydown", async (e)=>{
+  if(e.key==="Enter" && chatInput.value.trim()!==""){
+    const msg = chatInput.value;
+    chatInput.value="";
+    addMessage("Vous",msg);
+    const reply = await askAI(msg);
+    addMessage("Assistant",reply);
   }
 });
 </script>
+
 </body>
 </html>
