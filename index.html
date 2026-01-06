@@ -47,6 +47,7 @@ footer{text-align:center;background:#007BFF;color:white;padding:20px;}
   border-radius:10px;
   box-shadow:0 4px 8px rgba(0,0,0,0.2);
   overflow:hidden;
+  z-index:9999;
 }
 #chatbotHeader {
   background:#007BFF;
@@ -197,65 +198,46 @@ function addMessage(sender,text){
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Créneaux disponibles
-const availableSlots=["Demain 10h","Demain 14h","Vendredi 9h","Vendredi 15h"];
-let patientInfo={};
-let step=0;
-let currentSlotIndex=0;
+// Initialisation infos patient
+let patientInfo = { nom:"", prenom:"", soin:"", date:"", email:"", tel:"" };
 
-// Fonction envoi message IA
+// Envoyer message à GPT via backend
 async function sendMessage(userMsg){
-  addMessage("Vous",userMsg);
+  addMessage("Vous", userMsg);
+  try {
+    const response = await fetch("/api/chat", {
+      method:"POST",
+      headers: { "Content-Type":"application/json" },
+      body: JSON.stringify({ message: userMsg })
+    });
+    const data = await response.json();
+    const reply = data.reply;
 
-  switch(step){
-    case 0:
-      patientInfo.nom=userMsg;
-      addMessage("Assistant","Merci "+userMsg+". Quel est votre prénom ?");
-      step++;
-      break;
-    case 1:
-      patientInfo.prenom=userMsg;
-      addMessage("Assistant","Bonjour "+patientInfo.nom+" "+patientInfo.prenom+" ! Quel soin souhaitez-vous ?");
-      step++;
-      break;
-    case 2:
-      patientInfo.soin=userMsg;
-      addMessage("Assistant","Très bien. Voici les créneaux disponibles pour \""+patientInfo.soin+"\" :");
-      availableSlots.forEach((slot,i)=>{
-        addMessage("Assistant",`${i+1}. ${slot}`);
-      });
-      addMessage("Assistant","Veuillez entrer le numéro du créneau qui vous convient.");
-      step++;
-      break;
-    case 3:
-      let index = parseInt(userMsg)-1;
-      if(index>=0 && index<availableSlots.length){
-        patientInfo.date=availableSlots[index];
-        addMessage("Assistant","Parfait ! Pouvez-vous me donner votre email et numéro de téléphone ?");
-        step++;
-      } else {
-        addMessage("Assistant","Numéro invalide, veuillez réessayer.");
-      }
-      break;
-    case 4:
-      const parts=userMsg.split(/[ ,;/]/);
-      patientInfo.email=parts.find(p=>p.includes("@"))||"";
-      patientInfo.tel=parts.find(p=>/\d{10}/.test(p))||"";
-      addMessage("Assistant",`Merci ! Votre rendez-vous pour "${patientInfo.soin}" est enregistré le ${patientInfo.date}. Une confirmation sera envoyée au cabinet ${"aeyvaz97@gmail.com"}.`);
-      // Ici on enverra les infos au backend futur pour agenda/email
-      patientInfo={};
-      step=0;
-      currentSlotIndex=0;
-      break;
+    addMessage("Assistant", reply);
+
+    // Ici tu peux ajouter logique pour stocker infos patient et créer RDV si tu veux
+  } catch(err){
+    console.error(err);
+    addMessage("Assistant","Désolé, une erreur est survenue.");
   }
 }
 
-// Event Enter ou clic bouton
-chatInput.addEventListener("keydown",e=>{ if(e.key==="Enter" && chatInput.value.trim()!==""){ sendMessage(chatInput.value); chatInput.value=""; } });
-chatSendBtn.addEventListener("click",()=>{ if(chatInput.value.trim()!==""){ sendMessage(chatInput.value); chatInput.value=""; } });
+// Events
+chatInput.addEventListener("keydown", e=>{
+  if(e.key==="Enter" && chatInput.value.trim()!==""){
+    sendMessage(chatInput.value);
+    chatInput.value="";
+  }
+});
+chatSendBtn.addEventListener("click", ()=>{
+  if(chatInput.value.trim()!==""){
+    sendMessage(chatInput.value);
+    chatInput.value="";
+  }
+});
 
 // Message de bienvenue
-addMessage("Assistant","Bonjour 👋 Quel est votre nom pour commencer ?");
+addMessage("Assistant","Bonjour 👋 Je suis votre assistant pour prendre rendez-vous et répondre à vos questions. Quel est votre nom ?");
 </script>
 
 </body>
