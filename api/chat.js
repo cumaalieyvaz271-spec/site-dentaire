@@ -1,7 +1,7 @@
 import OpenAI from "openai";
 
 const openai = new OpenAI({
-  apiKey: process.env.OPENAI_API_KEY // Ta clé OpenAI
+  apiKey: process.env.OPENAI_API_KEY
 });
 
 export default async function handler(req, res) {
@@ -15,6 +15,7 @@ export default async function handler(req, res) {
           { role: "user", content: message }
         ]
       });
+
       res.status(200).json({ reply: response.choices[0].message.content });
     } catch (err) {
       console.error(err);
